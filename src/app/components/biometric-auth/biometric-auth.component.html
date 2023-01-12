@@ -1,0 +1,17 @@
+<ion-content style="min-height: 300px; margin-top: 25px">
+  <p class="ion-text-center">
+    <ion-icon style="font-size: 40px" class="red" src="/assets/biometric.svg"></ion-icon>
+  </p>
+
+  <ion-label class="ion-text-wrap">
+    <p class="ion-text-center">
+      L'autenticazione biometrica ti aiuta a proteggere il account contro accessi indesiderati. <br/> Abilitandola ci
+      consentirai di proteggere ancor di più il tuo account.
+    </p>
+  </ion-label>
+  <ion-item lines="none">
+    <ion-label slot="start">Stato attuale</ion-label>
+    <ion-toggle [(ngModel)]="isEnabled" [enableOnOffLabels]="true" color="danger" [checked]="isEnabled" slot="end"></ion-toggle>
+  </ion-item>
+  <ion-button (click)="submit()" style="margin-top: 20px" size="block" color="danger">Conferma</ion-button>
+</ion-content>

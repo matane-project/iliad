@@ -1,0 +1,7 @@
+{
+  "*": {
+    "target": "https://www.iliad.it/",
+    "secure": true,
+    "changeOrigin": true
+  }
+}

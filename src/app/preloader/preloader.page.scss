@@ -1,0 +1,27 @@
+.wrapper {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-items: center;
+}
+
+.square {
+  width: 80%;
+  margin: 1%;
+}
+
+.pulse {
+  animation: pulse 2s infinite ease-in-out alternate;
+}
+@keyframes pulse {
+  from { transform: scale(0.8); }
+  to { transform: scale(1.2); }
+}
+
+
+ion-button{
+  --background: rgb(168,67,56);
+  --color-focused: rgb(168,67,56);
+  --color-selected: rgb(168,67,56);
+}

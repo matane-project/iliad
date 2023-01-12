@@ -1,0 +1,7 @@
+{
+  "name": "iliad",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

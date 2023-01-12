@@ -1,0 +1,5 @@
+<app-biometric-auth *ngIf="name === 'isBiometricEnabled'" [isEnabled]="value !== 'disabled'"></app-biometric-auth>
+<app-address-editor *ngIf="name === 'address'"></app-address-editor>
+<app-edit-email [value]="value" *ngIf="name === 'email'"></app-edit-email>
+<app-payment-method *ngIf="name === 'paymentMethod'"></app-payment-method>
+<app-edit-password *ngIf="name === 'password'"></app-edit-password>

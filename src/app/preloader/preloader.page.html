@@ -1,0 +1,15 @@
+<ion-content>
+  <div class="wrapper">
+    <ion-grid class="square">
+        <ion-col size="12">
+         <p class="ion-text-center">
+           <img [class]="hasConnection ? 'pulse': '' " alt="logo" src="assets/logo.png" style="height: 150px">
+         </p>
+          <div class="ion-text-center" *ngIf="!hasConnection">
+            <p>La rivoluzione inizia con una connessione ad internet. </p>
+            <ion-button (click)="initState()" expand="block">Riprova</ion-button>
+          </div>
+        </ion-col>
+    </ion-grid>
+  </div>
+</ion-content>

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Iliad</string>
+    <string name="title_activity_main">Iliad</string>
+    <string name="package_name">one.geteasy.iliad</string>
+    <string name="custom_url_scheme">one.geteasy.iliad</string>
+</resources>

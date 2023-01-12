@@ -1,0 +1,23 @@
+<ion-content>
+ <div class="wrapper">
+   <ion-grid class="square">
+     <ion-col size="12">
+       <p class="ion-text-center">
+         <img alt="logo" src="assets/logo.png" style="height: 200px">
+       </p>
+       <ion-item>
+         <ion-label position="floating">User ID</ion-label>
+         <ion-input [(ngModel)]="userId"></ion-input>
+       </ion-item>
+       <ion-item>
+         <ion-label position="floating">Password</ion-label>
+         <ion-input type="password" [(ngModel)]="password"></ion-input>
+       </ion-item>
+       <br/>
+       <br/>
+       <ion-button (click)="login()" expand="block">Accedi</ion-button>
+       <p style="font-size: 10pt" class="ion-text-center">Nessun tuo dato verrà salvato nei server di Get Easy. Tutte le informazioni che fornisci vengono utilizzate con il solo scopo di mostrarti i tuoi consumi.</p>
+     </ion-col>
+   </ion-grid>
+ </div>
+</ion-content>

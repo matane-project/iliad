@@ -1,0 +1,283 @@
+<ion-content>
+  <ion-refresher  slot="fixed" (ionRefresh)="doRefresh($event)" pullMin="60" pullMax="150">
+    <ion-refresher-content class="white" pulling-icon="arrow-down-circle-outline" refreshingSpinner="circular" pullingText="Trascina per aggiornare" refreshingText="Sto aggiornando..."></ion-refresher-content>
+  </ion-refresher>
+  <ion-item style="background-color: white; z-index: 999999" class="sticky-top" color="white" lines="none">
+    <ion-avatar (click)="router.navigateByUrl('/app/account')" slot="end">
+      <img alt="Avatar" [src]="avatar" />
+    </ion-avatar>
+    <ion-label style="text-align: end" *ngIf="name !== undefined">
+      <h3>Ciao {{name}}</h3>
+      <p style="color: rgb(168,67,56)">{{phoneNumber}}</p>
+    </ion-label>
+
+    <ion-skeleton-text *ngIf="name === undefined"></ion-skeleton-text>
+  </ion-item>
+  <ion-skeleton-text  *ngIf="!usage.italianUsage.offer || !usage.italianUsage.renewalDate" style="width: 80%; height: 20px; margin-left: 20px; margin-top: 30px"></ion-skeleton-text>
+  <ion-skeleton-text  *ngIf="!usage.italianUsage.offer || !usage.italianUsage.renewalDate" style="width: 90%; margin-left: 20px"></ion-skeleton-text>
+  <ion-item lines="none" style="margin-top: 30px" *ngIf="usage.italianUsage.offer && usage.italianUsage.renewalDate">
+    <ion-label>
+      <h1>{{usage.italianUsage.offer}}</h1>
+      <p class="ion-text-wrap">{{usage.italianUsage.renewalDate}}</p>
+    </ion-label>
+  </ion-item>
+  <ion-skeleton-text *ngIf="!usage.italianUsage.credit" style="width: 50%; margin-left: 20px; margin-top: 30px;"></ion-skeleton-text>
+  <ion-item lines="none" *ngIf="usage.italianUsage.credit">
+    <p slot="start">Il tuo credito residuo è: {{usage.italianUsage.credit}}</p>
+  </ion-item>
+  <ion-slides pager="true">
+    <ion-slide>
+      <ion-grid style="margin-top: 30px; margin-bottom: 70px">
+        <ion-row>
+          <ion-col size="12">
+            <ion-item lines="none">
+              <ion-label>
+                <h1>Tariffa italiana</h1>
+                <p>Questa tariffa è valida su tutto il territorio nazionale.</p>
+              </ion-label>
+
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-card *ngIf="usage.italianUsage.data" style="height: 150px;" mode="ios">
+              <div style="height: 100px">
+                <circle-progress subtitleFontWeight="bold" [titleFontSize]="'14pt'" titleColor="black" subtitleColor="#A84338FF" [title]="usage.getItalianRemainingData().toFixed(2)" units="GB" subtitle="Rimanenti" [animateTitle]="true" [imageHeight]="150" [percent]="100-usage.italianUsage.dataUsagePercentage!"></circle-progress>
+              </div>
+              <br/>
+              <br/>
+              <div class="ion-text-center">
+                <ion-card-subtitle style="text-transform: uppercase" mode="md" class="ion-text-center">Data</ion-card-subtitle>
+              </div>
+            </ion-card>
+            <ion-skeleton-text *ngIf="!usage.italianUsage.data" style="height: 150px; width: 100%"></ion-skeleton-text>
+          </ion-col>
+          <ion-col size="6">
+            <ion-card *ngIf="usage.italianUsage.data" style="height: 150px;" mode="ios">
+              <ion-card-content class="ion-text-center">
+                <br/>
+                <ion-icon class="red" style="font-size: 30pt" name="call-outline"></ion-icon>
+                <br/>
+                <span>{{usage.italianUsage.call}}</span>
+                <br/>
+                <div class="ion-text-center">
+                  <ion-card-subtitle style="text-transform: uppercase" mode="md" class="ion-text-center">Chiamate</ion-card-subtitle>
+                </div>
+              </ion-card-content>
+            </ion-card>
+            <ion-skeleton-text *ngIf="!usage.italianUsage.data" style="height: 150px; width: 100%"></ion-skeleton-text>
+          </ion-col>
+          <ion-col size="6">
+            <ion-card *ngIf="usage.italianUsage.data" style="height: 150px;" mode="ios">
+              <ion-card-content class="ion-text-center">
+                <br/>
+                <ion-icon class="red" style="font-size: 30pt" name="chatbox-outline"></ion-icon>
+                <br/>
+                <span>{{usage.italianUsage.sms}}</span>
+                <br/>
+                <div class="ion-text-center">
+                  <ion-card-subtitle style="text-transform: uppercase" mode="md" class="ion-text-center">SMS</ion-card-subtitle>
+                </div>
+              </ion-card-content>
+            </ion-card>
+            <ion-skeleton-text *ngIf="!usage.italianUsage.data" style="height: 150px; width: 100%"></ion-skeleton-text>
+          </ion-col>
+          <ion-col size="6">
+            <ion-card *ngIf="usage.italianUsage.data" style="height: 150px;" mode="ios">
+              <ion-card-content class="ion-text-center">
+                <br/>
+                <ion-icon class="red" style="font-size: 30pt" name="chatbubble-ellipses-outline"></ion-icon>
+                <br/>
+                <span>{{usage.italianUsage.mms}}</span>
+                <br/>
+                <div class="ion-text-center">
+                  <ion-card-subtitle style="text-transform: uppercase" mode="md" class="ion-text-center">MMS</ion-card-subtitle>
+                </div>
+              </ion-card-content>
+            </ion-card>
+            <ion-skeleton-text *ngIf="!usage.italianUsage.mms" style="height: 150px; width: 100%"></ion-skeleton-text>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item lines="none">
+              <ion-label>
+                <h1>Addebiti straordinari</h1>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-list *ngIf="usage.italianUsage.data">
+              <ion-item>
+                <ion-icon slot="start" name="globe-outline" class="red"></ion-icon>
+                <ion-label>Dati</ion-label>
+                <ion-label slot="end">{{usage.italianUsage.dataExpenses}}</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon slot="start" name="call-outline" class="red"></ion-icon>
+                <ion-label>Chiamate</ion-label>
+                <ion-label slot="end">{{usage.italianUsage.callExpenses}}</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon class="red" slot="start" name="chatbox-outline"></ion-icon>
+                <ion-label>SMS</ion-label>
+                <ion-label slot="end">{{usage.italianUsage.smsExpenses}}</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon class="red" slot="start" name="chatbubble-ellipses-outline"></ion-icon>
+                <ion-label>MMS</ion-label>
+                <ion-label slot="end">{{usage.italianUsage.mmsExpenses}}</ion-label>
+              </ion-item>
+            </ion-list>
+            <ion-list *ngIf="!usage.italianUsage.data">
+              <ion-item>
+                <ion-icon slot="start" name="globe-outline" class="red"></ion-icon>
+                <ion-label><ion-skeleton-text></ion-skeleton-text></ion-label>
+                <ion-label slot="end"><ion-spinner></ion-spinner></ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon slot="start" name="call-outline" class="red"></ion-icon>
+                <ion-label><ion-skeleton-text></ion-skeleton-text></ion-label>
+                <ion-label slot="end"><ion-spinner></ion-spinner></ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon class="red" slot="start" name="chatbox-outline"></ion-icon>
+                <ion-label><ion-skeleton-text></ion-skeleton-text></ion-label>
+                <ion-label slot="end"><ion-spinner></ion-spinner></ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon class="red" slot="start" name="chatbubble-ellipses-outline"></ion-icon>
+                <ion-label><ion-skeleton-text></ion-skeleton-text></ion-label>
+                <ion-label slot="end"><ion-spinner></ion-spinner></ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+    <ion-slide>
+      <ion-grid style="margin-top: 30px; margin-bottom: 70px">
+        <ion-row>
+          <ion-col size="12">
+            <ion-item lines="none">
+              <ion-label>
+                <h1>Tariffa roaming</h1>
+                <p class="ion-text-wrap">Questa tariffa è valida in tutto il suolo europeo. Consulta il sito web per vedere le zone di copertura e i relativi costi.</p>
+              </ion-label>
+
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-card *ngIf="usage.roamingUsage.data" style="height: 150px;" mode="ios">
+              <div style="height: 100px">
+                <circle-progress subtitleFontWeight="bold" [titleFontSize]="'14pt'" titleColor="black" subtitleColor="#A84338FF" [title]="usage.getRoamingRemainingData().toFixed(2)" units="GB" subtitle="Rimanenti" [animateTitle]="true" [imageHeight]="150" [percent]="100-usage.roamingUsage.dataUsagePercentage!"></circle-progress>
+              </div>
+              <br/>
+              <br/>
+              <div class="ion-text-center">
+                <ion-card-subtitle style="text-transform: uppercase" mode="md" class="ion-text-center">Data</ion-card-subtitle>
+              </div>
+            </ion-card>
+            <ion-skeleton-text *ngIf="!usage.roamingUsage.data" style="height: 150px; width: 100%"></ion-skeleton-text>
+          </ion-col>
+          <ion-col size="6">
+            <ion-card *ngIf="usage.roamingUsage.call" style="height: 150px;" mode="ios">
+              <ion-card-content class="ion-text-center">
+                <br/>
+                <ion-icon class="red" style="font-size: 30pt" name="call-outline"></ion-icon>
+                <br/>
+                <span>{{usage.roamingUsage.call}}</span>
+                <br/>
+                <div class="ion-text-center">
+                  <ion-card-subtitle style="text-transform: uppercase" mode="md" class="ion-text-center">Chiamate</ion-card-subtitle>
+                </div>
+              </ion-card-content>
+            </ion-card>
+            <ion-skeleton-text *ngIf="!usage.roamingUsage.sms" style="height: 150px; width: 100%"></ion-skeleton-text>
+          </ion-col>
+          <ion-col size="6">
+            <ion-card *ngIf="usage.roamingUsage.sms" style="height: 150px;" mode="ios">
+              <ion-card-content class="ion-text-center">
+                <br/>
+                <ion-icon class="red" style="font-size: 30pt" name="chatbox-outline"></ion-icon>
+                <br/>
+                <span>{{usage.roamingUsage.sms}}</span>
+                <br/>
+                <div class="ion-text-center">
+                  <ion-card-subtitle style="text-transform: uppercase" mode="md" class="ion-text-center">SMS</ion-card-subtitle>
+                </div>
+              </ion-card-content>
+            </ion-card>
+            <ion-skeleton-text *ngIf="!usage.roamingUsage.mms" style="height: 150px; width: 100%"></ion-skeleton-text>
+          </ion-col>
+          <ion-col size="6">
+            <ion-card *ngIf="usage.roamingUsage.mms" style="height: 150px;" mode="ios">
+              <ion-card-content class="ion-text-center">
+                <br/>
+                <ion-icon class="red" style="font-size: 30pt" name="chatbubble-ellipses-outline"></ion-icon>
+                <br/>
+                <span>{{usage.roamingUsage.mms}}</span>
+                <br/>
+                <div class="ion-text-center">
+                  <ion-card-subtitle style="text-transform: uppercase" mode="md" class="ion-text-center">MMS</ion-card-subtitle>
+                </div>
+              </ion-card-content>
+            </ion-card>
+            <ion-skeleton-text *ngIf="!usage.italianUsage.mms" style="height: 150px; width: 100%"></ion-skeleton-text>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item lines="none">
+              <ion-label>
+                <h1>Addebiti straordinari</h1>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-list *ngIf="usage.roamingUsage.data">
+              <ion-item>
+                <ion-icon slot="start" name="globe-outline" class="red"></ion-icon>
+                <ion-label>Dati</ion-label>
+                <ion-label slot="end">{{usage.roamingUsage.dataExpenses}}</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon slot="start" name="call-outline" class="red"></ion-icon>
+                <ion-label>Chiamate</ion-label>
+                <ion-label slot="end">{{usage.roamingUsage.callExpenses}}</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon class="red" slot="start" name="chatbox-outline"></ion-icon>
+                <ion-label>SMS</ion-label>
+                <ion-label slot="end">{{usage.roamingUsage.smsExpenses}}</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon class="red" slot="start" name="chatbubble-ellipses-outline"></ion-icon>
+                <ion-label>MMS</ion-label>
+                <ion-label slot="end">{{usage.italianUsage.mmsExpenses}}</ion-label>
+              </ion-item>
+            </ion-list>
+            <ion-list *ngIf="!usage.roamingUsage.data">
+              <ion-item>
+                <ion-icon slot="start" name="globe-outline" class="red"></ion-icon>
+                <ion-label><ion-skeleton-text></ion-skeleton-text></ion-label>
+                <ion-label slot="end"><ion-spinner></ion-spinner></ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon slot="start" name="call-outline" class="red"></ion-icon>
+                <ion-label><ion-skeleton-text></ion-skeleton-text></ion-label>
+                <ion-label slot="end"><ion-spinner></ion-spinner></ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon class="red" slot="start" name="chatbox-outline"></ion-icon>
+                <ion-label><ion-skeleton-text></ion-skeleton-text></ion-label>
+                <ion-label slot="end"><ion-spinner></ion-spinner></ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon class="red" slot="start" name="chatbubble-ellipses-outline"></ion-icon>
+                <ion-label><ion-skeleton-text></ion-skeleton-text></ion-label>
+                <ion-label slot="end"><ion-spinner></ion-spinner></ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
+
+</ion-content>

@@ -1,0 +1,21 @@
+<ion-content style="min-height: 500px; margin-top: 50px">
+  <p class="ion-text-center">
+    <ion-icon name="mail-outline" class="red" style="font-size: 40px"></ion-icon>
+  </p>
+  <h4 class="ion-text-center">
+    Aggiorna la tua email
+  </h4>
+  <ion-item>
+    <ion-label position="floating">Email</ion-label>
+    <ion-input type="email" [(ngModel)]="value"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Email</ion-label>
+    <ion-input type="email" [(ngModel)]="repeatEmail"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Password</ion-label>
+    <ion-input type="password" [(ngModel)]="password"></ion-input>
+  </ion-item>
+  <ion-button size="block" color="danger">Aggiorna</ion-button>
+</ion-content>

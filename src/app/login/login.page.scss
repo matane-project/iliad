@@ -1,0 +1,23 @@
+.wrapper {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-items: center;
+}
+
+.square {
+  width: 80%;
+  margin: 1%;
+}
+
+ion-item, ion-input{
+  --ion-background-color: transparent!important;
+  --border-color: rgb(168,67,56)
+}
+
+ion-button{
+  --background: rgb(168,67,56);
+  --color-focused: rgb(168,67,56);
+  --color-selected: rgb(168,67,56);
+}

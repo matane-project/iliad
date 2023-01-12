@@ -1,0 +1,102 @@
+<ion-content>
+  <ion-item style="background-color: white; z-index: 999999" class="sticky-top" color="white" lines="none">
+    <ion-avatar (click)="router.navigateByUrl('/app/account')" slot="end">
+      <img alt="Avatar" [src]="avatar" />
+    </ion-avatar>
+    <ion-label style="text-align: end" *ngIf="name">
+      <h3>Ciao {{name}}</h3>
+      <p style="color: rgb(168,67,56)">{{phoneNumber}}</p>
+    </ion-label>
+
+    <ion-skeleton-text *ngIf="!name"></ion-skeleton-text>
+  </ion-item>
+  <ion-list>
+    <ion-item [disabled]="isLoading" lines="none">
+      <ion-icon slot="start" name="person-outline" class="red"></ion-icon>
+      <ion-label *ngIf="name">
+        <h2>Titolare della linea</h2>
+        <p>{{name}}</p>
+      </ion-label>
+      <ion-label *ngIf="!name">
+        <h2>Titolare della linea</h2>
+        <ion-skeleton-text *ngIf="!name"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+    <ion-item [disabled]="isLoading" (click)="editItem('email')" lines="none">
+      <ion-icon slot="start" name="mail-outline" class="red"></ion-icon>
+      <ion-label *ngIf="details.address.value === ''">
+        <h2>Il mio indirizzo email</h2>
+        <ion-skeleton-text></ion-skeleton-text>
+      </ion-label>
+      <ion-label *ngIf="details.email.value !== ''">
+        <h2>Il mio indirizzo email</h2>
+        <p class="ion-text-wrap">{{details.email.value}}</p>
+      </ion-label>
+      <ion-icon slot="end" class="red" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+    <ion-item [disabled]="isLoading" (click)="editItem('address')" lines="none">
+      <ion-icon slot="start" name="home-outline" class="red"></ion-icon>
+      <ion-label *ngIf="details.address.value === ''">
+        <h2>Il mio indirizzo</h2>
+        <ion-skeleton-text></ion-skeleton-text>
+      </ion-label>
+      <ion-label *ngIf="details.address.value !== ''">
+        <h2>Il mio indirizzo</h2>
+        <p class="ion-text-wrap">{{details.address.value}}</p>
+      </ion-label>
+      <ion-icon slot="end" class="red" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+    <ion-item [disabled]="isLoading" (click)="editItem('paymentMethod')" lines="none">
+      <ion-icon slot="start" name="card-outline" class="red"></ion-icon>
+      <ion-label *ngIf="details.paymentMethod.value === ''">
+        <h2>Il mio metodo di pagamento</h2>
+        <ion-skeleton-text></ion-skeleton-text>
+      </ion-label>
+      <ion-label *ngIf="details.paymentMethod.value !== ''">
+        <h2>Il mio metodo di pagamento</h2>
+        <p class="ion-text-wrap">{{details.paymentMethod.value}}</p>
+      </ion-label>
+      <ion-icon slot="end" class="red" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+    <ion-item [disabled]="isLoading" (click)="editItem('password')" lines="none">
+      <ion-icon slot="start" name="lock-closed-outline" class="red"></ion-icon>
+      <ion-label *ngIf="details.password.value === ''">
+        <h2>La mia password</h2>
+        <ion-skeleton-text></ion-skeleton-text>
+      </ion-label>
+      <ion-label *ngIf="details.password.value !== ''">
+        <h2>La mia password</h2>
+        <p class="ion-text-wrap">{{details.password.value}}</p>
+      </ion-label>
+      <ion-icon slot="end" class="red" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+    <ion-item [disabled]="isLoading" (click)="editItem('puk')" lines="none">
+      <ion-icon slot="start" name="lock-closed-outline" class="red"></ion-icon>
+      <ion-label *ngIf="puk === ''">
+        <h2>Il mio codice puk</h2>
+        <p>Tocca per visualizzare</p>
+      </ion-label>
+      <ion-label *ngIf="puk !== ''">
+        <h2>La mia password</h2>
+        <p class="ion-text-wrap">{{puk}}</p>
+      </ion-label>
+      <ion-icon slot="end" class="red" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+    <ion-item [disabled]="isLoading" (click)="editItem('isBiometricEnabled')" lines="none" *ngIf="isBiometricSupported">
+      <ion-icon slot="start" src="assets/biometric.svg" class="red"></ion-icon>
+      <ion-label>
+        <h2>Autenticazione biometrica</h2>
+        <p class="ion-text-wrap">Utilizza l'autenticazione biometrica per velocizzare il login</p>
+      </ion-label>
+      <ion-icon slot="end" class="red" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+    <ion-item [disabled]="isLoading" (click)="logout()" lines="none">
+      <ion-icon slot="start" name="log-out-outline" class="red"></ion-icon>
+      <ion-label>
+        <h2>Logout</h2>
+        <p>Clicca qui per uscire dall'app</p>
+      </ion-label>
+      <ion-icon slot="end" class="red" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>
